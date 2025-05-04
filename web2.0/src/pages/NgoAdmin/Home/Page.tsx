@@ -1,22 +1,21 @@
+import { listMonitoredElectionRoundsOptions } from "@/query-options/elections";
+import type { ElectionRound } from "@/types/election-round-model";
+import { useQuery } from "@tanstack/react-query";
+
 function Page() {
+  const { data } = useQuery(listMonitoredElectionRoundsOptions());
+
   return (
     <>
-      {/* <DataTable
-        table={table}
-        actionBar={<TasksTableActionBar table={table} />}
-      ></DataTable>
-      <UpdateTaskSheet
-        open={rowAction?.variant === "update"}
-        onOpenChange={() => setRowAction(null)}
-        task={rowAction?.row.original ?? null}
-      />
-      <DeleteTasksDialog
-        open={rowAction?.variant === "delete"}
-        onOpenChange={() => setRowAction(null)}
-        tasks={rowAction?.row.original ? [rowAction?.row.original] : []}
-        showTrigger={false}
-        onSuccess={() => rowAction?.row.toggleSelected(false)}
-      /> */}
+      <p>
+        <b>All ElectionRounds</b>
+      </p>
+      <br />
+      <ul>
+        {data?.map((round: ElectionRound, index: number) => (
+          <li key={`${round.id}-${index}`}>{round.title}</li>
+        ))}
+      </ul>
     </>
   );
 }
